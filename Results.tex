@@ -1,0 +1,85 @@
+\documentclass[12pt,a4paper,leqno]{report}
+\usepackage{a4wide}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{float, afterpage, rotating, graphicx}
+\usepackage{longtable, booktabs, tabularx}
+\usepackage{verbatim}
+\usepackage{eurosym, calc, chngcntr}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, bm, delarray} 
+\usepackage{caption}
+\usepackage{tkz-graph}
+
+\usepackage[unicode=true]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, menucolor=black, runcolor=black, urlcolor=black}
+\setlength{\parskip}{.5ex}
+\setlength{\parindent}{0ex}
+
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}
+\renewcommand{\theenumi}{\roman{enumi}}
+
+% Set this counter to "first exercise of the week minus one".
+\setcounter{exercise}{0}
+
+\begin{document}
+	
+	\begin{center}
+		\begin{large}
+			\textbf{
+				Effective programming practices for economists\\
+				Universität Bonn, Winter 2016/17 \\[2ex]
+				Term Paper\\[2ex]
+				Rohan John
+			}
+		\end{large}
+	\end{center}
+
+This Python program runs a regression on macroeconomic Investment using the data downloaded from the Federal reserve database. It automatically downloads and sort the variables needed for the regression such as interest rate, GDP growth rate, Business sentiment and R\&D. Using percentage change instead of absolute values allows us to avoid autocorrelation.\footnote{This regression analysis is not to be used as a well thought out econometric modeling but is only used for the purposes of programming.}
+
+The regression equation is: \newline
+\begin{center}
+	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment +$\beta_{4}$R\&D
+\end{center}
+
+For the first regression equation we'll be dropping the R\&D variable and hence the equation becomes: \newline
+\begin{center}
+	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment 
+\end{center}
+\input{res1}
+
+This regression output shows that the interest rate has negative effect while GDP growth rate and business sentiment rate have positive effect.
+
+
+For the second regression equation we add the R\&D variable and hence the equation becomes: \newline
+\begin{center}
+investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment +$\beta_{4}$R\&D
+\end{center}
+\input{res2}
+
+There is positive effect of R\&D on investment.
+
+
+\newpage
+The third table is a summary of both regressions:
+%\pgfplotstabletypeset[col sep=comma,
+%columns={Zeroed time (s),Y Position In Meters using new trans. Eq.},
+%{test.csv}
+\input{res3}
+This shows that all the dependent variables are significant.
+
+\newpage
+This shows the Partial regression plots of investment and business sentiment:
+
+\includegraphics[width=0.8\textwidth]{res1.png}
+\newline
+
+This shows the Partial regression plots of investment and R\&D:
+
+\includegraphics[width=0.8\textwidth]{res2.png}
+\newpage
+This shows the Partial regression plots of investment and Interest rate:
+
+\includegraphics[width=0.8\textwidth]{res3.png}
+
+\end{document}
