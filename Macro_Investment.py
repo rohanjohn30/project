@@ -53,3 +53,7 @@ res1 = model.fit()
 fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.plot_regress_exog(res1, "bsent", fig=fig)
 fig.savefig('res1.png')
+
+'''We run the second regression here with R&D as the independent variable'''  
+mod2= ols('investment ~ rate + GDP + bsent + research -1', data=dat)
+res2 = mod2.fit()
