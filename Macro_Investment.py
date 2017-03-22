@@ -48,3 +48,8 @@ def data():
 dat = data()
 model = ols('investment ~ rate + GDP + bsent -1', data=dat)
 res1 = model.fit()
+
+'''Plotting investment wrt business sentiment'''
+fig = plt.figure(figsize=(12,8))
+fig = sm.graphics.plot_regress_exog(res1, "bsent", fig=fig)
+fig.savefig('res1.png')
