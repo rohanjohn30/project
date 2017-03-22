@@ -72,3 +72,16 @@ fig.savefig('res3.png')
 '''Gives a summary of both regressions'''  
 res3 = summary_col([res1,res2],stars=True,float_format='%0.2f',
                   info_dict={'R2':lambda x: "{:.2f}".format(x.rsquared)})
+
+'''runs a for loop to write the summary output to latex'''
+result = [res1, res2]
+filename = ['res1', 'res2']
+
+for (res, name) in zip(result, filename):
+   f = open(name +'.tex', 'w')
+   f.write(res.summary().as_latex())
+   f.close()
+
+f = open('res3.tex', 'w')
+f.write(res3.as_latex())
+f.close()
