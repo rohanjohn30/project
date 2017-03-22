@@ -85,3 +85,9 @@ for (res, name) in zip(result, filename):
 f = open('res3.tex', 'w')
 f.write(res3.as_latex())
 f.close()
+
+'''runs the tex file called Results and deletes all the intermediary files'''
+subprocess.check_call(['pdflatex', 'Results.tex'])
+subprocess.Popen('Results.pdf',shell=True)
+results = ['res1', 'res2', 'res3']
+
