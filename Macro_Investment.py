@@ -43,3 +43,8 @@ def data():
     new_f.head()
     os.remove('test.csv')
     return new_f
+
+'''We run the first regression here with investment as the dependent variable without intercept'''  
+dat = data()
+model = ols('investment ~ rate + GDP + bsent -1', data=dat)
+res1 = model.fit()
