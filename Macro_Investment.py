@@ -68,3 +68,7 @@ fig.savefig('res2.png')
 fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.plot_regress_exog(res2, "rate", fig=fig)
 fig.savefig('res3.png')
+
+'''Gives a summary of both regressions'''  
+res3 = summary_col([res1,res2],stars=True,float_format='%0.2f',
+                  info_dict={'R2':lambda x: "{:.2f}".format(x.rsquared)})
