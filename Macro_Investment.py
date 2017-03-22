@@ -90,4 +90,6 @@ f.close()
 subprocess.check_call(['pdflatex', 'Results.tex'])
 subprocess.Popen('Results.pdf',shell=True)
 results = ['res1', 'res2', 'res3']
-
+for r in results:
+   os.remove(r+'.tex')
+   os.remove(r+'.png')
