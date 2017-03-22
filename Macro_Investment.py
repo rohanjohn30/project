@@ -19,7 +19,13 @@ import statsmodels.api as sm
 start = dt.datetime(1970, 1, 1)     #sets the start year of analysis. 1970 seems to be the starting year for most data sets.
 end = dt.datetime(2017, 1, 1)      #sets the end year of analysis. 
 
- con = web.DataReader(["A191RL1Q225SBEA","BSCICP02USQ460S",
+def data():
+    '''Downloads data from Federal Reserve for the variables Investment, GDP,
+    Business sentiment, Federal funds rate, and R&D expenditure. All the variables
+    are downloaded as percent change from preceding period which removes most
+    effects of lagged varibles. Adds labels for each variables in the csv file.
+    '''    
+    con = web.DataReader(["A191RL1Q225SBEA","BSCICP02USQ460S",
                           "A006RL1A225NBEA","IRSTFR01USA156N","Y006RL1A225NBEA"], 
                             "fred", start, end)
     con.ix['2013-01-01']
