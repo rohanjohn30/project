@@ -57,3 +57,14 @@ fig.savefig('res1.png')
 '''We run the second regression here with R&D as the independent variable'''  
 mod2= ols('investment ~ rate + GDP + bsent + research -1', data=dat)
 res2 = mod2.fit()
+
+'''Plotting investment wrt R&D'''
+fig = plt.figure(figsize=(12,8))
+fig = sm.graphics.plot_regress_exog(res2, "research", fig=fig)
+fig.savefig('res2.png')
+
+
+'''Plotting investment wrt funds rate'''
+fig = plt.figure(figsize=(12,8))
+fig = sm.graphics.plot_regress_exog(res2, "rate", fig=fig)
+fig.savefig('res3.png')
