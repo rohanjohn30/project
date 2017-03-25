@@ -2,7 +2,7 @@
 """
 This program runs a multivariate regression for Keynesian Investment function.
 The independent variables are business sentiment, GDP, funds Rate and R&D.
-The dependent varibale is Investment rate.
+The dependent variable is Investment rate.
 The data is automatically downloaded from the Federal Reserve.
 """
 import pandas as pd
