@@ -13,6 +13,7 @@ import datetime as dt
 import os
 import subprocess
 from statsmodels.formula.api import ols
+from statsmodels.stats.anova import anova_lm
 import statsmodels.api as sm
 
 # sets the start year of analysis. 1970 seems to be the starting year for
@@ -98,6 +99,12 @@ res3 = mod3.fit()
 #plot graph with actual and forecasted values of investment rates for the third regression
 x = dat[['rate','GDP','bsent','research']]
 compare(res3,x,y)
+
+#Peform analysis of variance on fitted linear model with all variables
+anova_results = anova_lm(res3)
+f = open('anova.tex', 'w')
+f.write(anova_results.to_latex())
+f.close()
 
 #plotting investment wrt funds rate, business sentiment and R&D
 plot(res1,"rate")
