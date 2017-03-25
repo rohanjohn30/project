@@ -13,7 +13,6 @@ import datetime as dt
 import os
 import subprocess
 from statsmodels.formula.api import ols
-from statsmodels.iolib.summary2 import summary_col
 import statsmodels.api as sm
 
 # sets the start year of analysis. 1970 seems to be the starting year for
@@ -78,9 +77,9 @@ def plot(res,var):
     fig.savefig(graph+'.png')
     j+=1    
 
-'''We run the first regression here with investment as the dependent variable without intercept'''
+#We run the first regression here with investment as the dependent variable without intercept 
 dat = data()
-model = ols('investment ~ rate + GDP + bsent -1', data=dat)
+model = ols('investment ~ rate + GDP -1', data=dat)
 res1 = model.fit()
 
 #plot graph with actual and forecasted values of investment rates for the first regression
@@ -88,25 +87,31 @@ y= dat['investment']
 x = dat[['rate','GDP']]
 compare(res1,x,y)
 
-
-
-'''We run the second regression here with R&D as the independent variable'''
-mod2 = ols('investment ~ rate + GDP + bsent + research -1', data=dat)
+#We run the second regression here with Business sentiment as the independent variable  
+mod2= ols('investment ~ rate + GDP + bsent -1', data=dat)
 res2 = mod2.fit()
 
+#We run the Third regression here with R&D as the independent variable  
+mod3= ols('investment ~ rate + GDP + bsent + research -1', data=dat)
+res3 = mod3.fit()
 
-'''runs a for loop to write the summary output to latex'''
-result = [res1, res2]
-filename = ['res1', 'res2']
+#plot graph with actual and forecasted values of investment rates for the third regression
+x = dat[['rate','GDP','bsent','research']]
+compare(res3,x,y)
 
+#plotting investment wrt funds rate, business sentiment and R&D
+plot(res1,"rate")
+plot(res2,"bsent")
+plot(res3,"research")
+plot(res1,"GDP")
+
+#runs a for loop to write the intermediary summary output to latex
+result = [res1, res2, res3]
+filename = ['res1', 'res2','res3']
 for (res, name) in zip(result, filename):
-    f = open(name + '.tex', 'w')
-    f.write(res.summary().as_latex())
-    f.close()
-
-f = open('res3.tex', 'w')
-f.write(res3.as_latex())
-f.close()
+   f = open(name +'.tex', 'w')
+   f.write(res.summary().as_latex())
+   f.close()
 
 '''runs the tex file called Results and deletes all the intermediary files'''
 subprocess.check_call(['pdflatex', 'Results.tex'])
