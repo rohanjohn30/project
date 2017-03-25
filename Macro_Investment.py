@@ -83,29 +83,17 @@ dat = data()
 model = ols('investment ~ rate + GDP + bsent -1', data=dat)
 res1 = model.fit()
 
-'''Plotting investment wrt business sentiment'''
-fig = plt.figure(figsize=(12, 8))
-fig = sm.graphics.plot_regress_exog(res1, "bsent", fig=fig)
-fig.savefig('res1.png')
+#plot graph with actual and forecasted values of investment rates for the first regression
+y= dat['investment']
+x = dat[['rate','GDP']]
+compare(res1,x,y)
+
+
 
 '''We run the second regression here with R&D as the independent variable'''
 mod2 = ols('investment ~ rate + GDP + bsent + research -1', data=dat)
 res2 = mod2.fit()
 
-'''Plotting investment wrt R&D'''
-fig = plt.figure(figsize=(12, 8))
-fig = sm.graphics.plot_regress_exog(res2, "research", fig=fig)
-fig.savefig('res2.png')
-
-
-'''Plotting investment wrt funds rate'''
-fig = plt.figure(figsize=(12, 8))
-fig = sm.graphics.plot_regress_exog(res2, "rate", fig=fig)
-fig.savefig('res3.png')
-
-'''Gives a summary of both regressions'''
-res3 = summary_col([res1, res2], stars=True, float_format='%0.2f',
-                   info_dict={'R2': lambda x: "{:.2f}".format(x.rsquared)})
 
 '''runs a for loop to write the summary output to latex'''
 result = [res1, res2]
