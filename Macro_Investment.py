@@ -40,17 +40,18 @@ def data():
     con.to_csv('raw.csv')
     con = read_csv('raw.csv')
     con.columns = ['Date', 'GDP', 'bsent', 'investment', 'rate', 'research']
-    #con['lagGDP'] = con['GDP'].shift(-1)
     con.to_csv('test.csv')
     os.remove('raw.csv')
     f = read_csv("test.csv")
     keep_col = ['Date', 'GDP', 'bsent', 'investment', 'rate', 'research']
-    new_f = f[keep_col]
-    new_f.dropna(how='any', inplace=True)
-    # creates csv file with the given headers
-    new_f.to_csv('data.csv', index=False)
-    new_f.head()
+    new_file = f[keep_col]
+    new_file.dropna(how='any', inplace=True)  #drops any row with NaN entry
+    new_file.to_csv('data1.csv', index=False) # creates csv file with the given headers
+    new_file.head()
     os.remove('test.csv')
+    new_f= read_csv("data1.csv")
+    new_f.to_csv('data.csv', index=False)    #contains complete entries of the variables
+    os.remove('data1.csv')                   
     return new_f
 
 '''We run the first regression here with investment as the dependent variable without intercept'''
