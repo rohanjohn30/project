@@ -9,8 +9,8 @@
 \usepackage{amsmath, amssymb, amsfonts, amsthm, bm, delarray} 
 \usepackage{caption}
 \usepackage{tkz-graph}
-
 \usepackage[unicode=true]{hyperref}
+
 \hypersetup{colorlinks=true, linkcolor=black, anchorcolor=black, citecolor=black, filecolor=black, menucolor=black, runcolor=black, urlcolor=black}
 \setlength{\parskip}{.5ex}
 \setlength{\parindent}{0ex}
@@ -35,51 +35,70 @@
 		\end{large}
 	\end{center}
 
-This Python program runs a regression on macroeconomic Investment using the data downloaded from the Federal reserve database. It automatically downloads and sort the variables needed for the regression such as interest rate, GDP growth rate, Business sentiment and R\&D. Using percentage change instead of absolute values allows us to avoid autocorrelation.\footnote{This regression analysis is not to be used as a well thought out econometric modeling but is only used for the purposes of programming.}
+This Python program runs a regression on macroeconomic Investment by downloading data from the Federal reserve database. It automatically downloads and sort the variables needed for the regression such as interest rate, GDP growth rate, Business sentiment and R\&D. Using percentage change instead of absolute values allows us to avoid autocorrelation.\footnote{This regression analysis is not to be used as a well thought out econometric modeling but is only used for the purposes of programming.}
 
-The regression equation is: \newline
+The general regression equation is: 
 \begin{center}
 	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment +$\beta_{4}$R\&D
 \end{center}
 
-For the first regression equation we'll be dropping the R\&D variable and hence the equation becomes: \newline
+For the first regression equation we'll be dropping the Business sentiment and R\&D variables and hence the equation becomes: 
 \begin{center}
-	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment 
+	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate
 \end{center}
 \input{res1}
 
-This regression output shows that the interest rate has negative effect while GDP growth rate and business sentiment rate have positive effect.
+This regression output shows that the interest rate has negative effect while GDP growth rate have positive effect. The government investment/autonomous investment or the intercept has been ignored as it is included in G i.e, govt expenditure. 
 
+In a graph with both the actual investment values and forecasted values, we get:\newline
+\includegraphics[width=0.7\textwidth]{1.png} 
 
-For the second regression equation we add the R\&D variable and hence the equation becomes: \newline
+The forecasted values are close to the actual values showing a very good predictive power of the independent variables. To see the relation of investment with interest rates, we do a partial regression plot.
+This shows the Partial regression plots of investment and federal funds rate:
+
+\includegraphics[width=1\textwidth]{res1.png}
+The partial regression plot show a downward sloping curve. This shows an inverse relation with investment. This is supported by the negative coefficient of fed rate in the regression table, even though its not significant at 5\%. Next we see the partial plots of GDP rate.
+
+\includegraphics[width=1\textwidth]{res4.png} 
+A positive slope represents a positive relation with investment. Higher GDP growth results in higher demand leading to more investment. The highly significant coefficient for GDP in the regression summary also backs up the graph.  
+
+Next we run a second regression equation where we add the business sentiment variable. Business sentiment or confidence is an economic indicator that measures the amount of optimism or pessimism that business managers feel about the prospects of their companies/ organisations. It also provides an overview of the state of the economy. 
+
+The equation becomes: 
 \begin{center}
-investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment +$\beta_{4}$R\&D
+investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment
 \end{center}
+\newpage
+The regression output generated is:
 \input{res2}
 
-There is positive effect of R\&D on investment.
+This shows the Partial regression plots of investment and Business sentiment:
 
+\includegraphics[width=1\textwidth]{res2.png}
 
 \newpage
-The third table is a summary of both regressions:
-%\pgfplotstabletypeset[col sep=comma,
-%columns={Zeroed time (s),Y Position In Meters using new trans. Eq.},
-%{test.csv}
+For the third regression equation we add the R\&D variable. R\&D is an important part of investment decision. Investing in R\&D helps increase production efficiency and reduce cost in the long run. This effects the investment rate. Hence the equation becomes:
+\begin{center}
+	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment +$\beta_{4}$R\&D
+\end{center}
+The regression summary is:
 \input{res3}
-This shows that all the dependent variables are significant.
+The result shows that all the variables are highly significant. We check now whether any coefficients are 0 using ANOVA. The ANOVA table is:\newline
 
+\input{anova}
+
+The results of F-test show that the coefficients are significantly different from 0 and so our independent variables have explanatory power.  
 \newpage
-This shows the Partial regression plots of investment and business sentiment:
-
-\includegraphics[width=0.8\textwidth]{res1.png}
-\newline
 
 This shows the Partial regression plots of investment and R\&D:
 
-\includegraphics[width=0.8\textwidth]{res2.png}
-\newpage
-This shows the Partial regression plots of investment and Interest rate:
+\includegraphics[width=1\textwidth]{res3.png}
+There is significant positive effect of R\&D on investment. This shows that R\&D along with GDP rate and business sentiment have a positive impact on investment growth while fed funds rates has a negative impact. This shows that the Keynesian relation of the investment function holds true. 
 
-\includegraphics[width=0.8\textwidth]{res3.png}
+The rate variable has now become significant. This may be due to the relation of interest with R\&D variable. Intuitively it can be said that higher rates results in lower research as opportunity cost of investment in  research is higher. 
 
+In a graph with both the actual investment values and forecasted values, we get:\newline
+\includegraphics[width=0.7\textwidth]{2.png} 
+
+The forecasted values are close to the actual values showing a very good predictive power of the independent variables. Adding Business sentiment and R\&D as independent variables have increased the explanatory power of the model. 
 \end{document}
