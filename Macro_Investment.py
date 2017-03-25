@@ -16,10 +16,12 @@ from statsmodels.formula.api import ols
 from statsmodels.stats.anova import anova_lm
 import statsmodels.api as sm
 
-# sets the start year of analysis. 1970 seems to be the starting year for
-# most data sets.
-start = dt.datetime(1970, 1, 1)
-end = dt.datetime(2017, 1, 1)  # sets the end year of analysis.
+#1970 seems to be the starting year for most data sets
+start = dt.datetime(1970, 1, 1)    # sets the start year of analysis. 
+end = dt.datetime(2017, 1, 1)      # sets the end year of analysis.
+global i,j                         #sets a counter for the functions compare() and plot()
+i=1
+j=1
 
 
 def data():
