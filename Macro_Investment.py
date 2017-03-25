@@ -5,7 +5,7 @@ The independent variables are business sentiment, GDP, funds Rate and R&D.
 The dependent varibale is Investment rate.
 The data is automatically downloaded from the Federal Reserve.
 """
-
+import pandas as pd
 from pandas import read_csv
 import pandas.io.data as web
 import matplotlib.pyplot as plt
@@ -67,6 +67,16 @@ def compare(res,x,y):
     plt.savefig(str(i)+'.png', dpi=150)
     i+=1
     plt.show()
+    
+def plot(res,var):
+    '''Plots multiple partial regression graphs wrt to an independent variable (var) 
+    passed as arguments and the regression results (res).'''
+    global j
+    fig = plt.figure(figsize=(12,8))
+    fig = sm.graphics.plot_regress_exog(res, var, fig=fig)
+    graph = "res"+str(j)
+    fig.savefig(graph+'.png')
+    j+=1    
 
 '''We run the first regression here with investment as the dependent variable without intercept'''
 dat = data()
