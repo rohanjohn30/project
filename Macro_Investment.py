@@ -120,10 +120,16 @@ for (res, name) in zip(result, filename):
    f.write(res.summary().as_latex())
    f.close()
 
-'''runs the tex file called Results and deletes all the intermediary files'''
+#runs the tex file called Results
 subprocess.check_call(['pdflatex', 'Results.tex'])
-subprocess.Popen('Results.pdf', shell=True)
+subprocess.Popen('Results.pdf',shell=True)
+
+#deletes all the intermediary files
 results = ['res1', 'res2', 'res3']
 for r in results:
-    os.remove(r + '.tex')
-    os.remove(r + '.png')
+   os.remove(r+'.tex')
+   os.remove(r+'.png')
+os.remove('anova.tex')
+pic = ['1','2']
+for r in pic:
+    os.remove(r+'.png')
