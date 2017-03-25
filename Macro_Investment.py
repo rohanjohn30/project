@@ -54,6 +54,20 @@ def data():
     os.remove('data1.csv')                   
     return new_f
 
+def compare(res,x,y):
+    '''Plots a graphs with with actual Y and forcasted Y using global variable j
+    to keep track and name intermediary image files. Uses regression results(res), 
+    independent variable(x) and dependent variable(y)'''
+    global i
+    ypred = res.predict(x)
+    pred= pd.DataFrame(ypred)
+    ax=y.plot()
+    pred.plot(ax=ax)
+    plt.legend(["Actual Y","Forecast Y'"])
+    plt.savefig(str(i)+'.png', dpi=150)
+    i+=1
+    plt.show()
+
 '''We run the first regression here with investment as the dependent variable without intercept'''
 dat = data()
 model = ols('investment ~ rate + GDP + bsent -1', data=dat)
