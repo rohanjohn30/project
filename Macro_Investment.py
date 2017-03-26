@@ -4,6 +4,9 @@ This program runs a multivariate regression for Keynesian Investment function.
 The independent variables are business sentiment, GDP, funds Rate and R&D.
 The dependent variable is Investment rate.
 The data is automatically downloaded from the Federal Reserve.
+
+THIS PROGRAM REQUIRES INTERNET ACCESS FOR DOWNLOADING DATA AND AS SUCH WILL NOT
+WORK WITHOUT IT.
 """
 import pandas as pd
 from pandas import read_csv
@@ -112,7 +115,7 @@ compare(res3, x, y)
 
 # Peform analysis of variance on fitted linear model with all variables
 anova_results = anova_lm(res3)
-f = open('anova.tex', 'w')
+f = open('res4.tex', 'w')
 f.write(anova_results.to_latex())
 f.close()
 
@@ -135,7 +138,7 @@ subprocess.check_call(['pdflatex', 'Results.tex'])
 subprocess.Popen('Results.pdf', shell=True)
 
 # deletes all the intermediary files
-results = ['res1', 'res2', 'res3']
+results = ['res1', 'res2', 'res3','res4']
 for r in results:
     os.remove(r + '.tex')
     os.remove(r + '.png')
