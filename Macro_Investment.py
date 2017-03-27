@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """
+This 
 This program runs a multivariate regression for Keynesian Investment function.
 The independent variables are business sentiment, GDP, funds Rate and R&D.
 The dependent variable is Investment rate.
@@ -42,10 +43,10 @@ def data():
                          start,
                          end)
     con.ix['2013-01-01']
-    con.to_csv('raw.csv')
-    con = read_csv('raw.csv')
+    con.to_csv('raw.csv')   #saves data to a file
+    con = read_csv('raw.csv')  
     con.columns = ['Date', 'GDP', 'bsent', 'investment', 'rate', 'research']
-    con.to_csv('test.csv')
+    con.to_csv('test.csv')   #saves data to a new file with column names
     os.remove('raw.csv')
     f = read_csv("test.csv")
     keep_col = ['Date', 'GDP', 'bsent', 'investment', 'rate', 'research']
@@ -56,7 +57,7 @@ def data():
     new_file.head()
     os.remove('test.csv')
     new_f = read_csv("data1.csv")
-    # contains complete entries of the variables
+    #  creats file which contains complete entries of the variables
     new_f.to_csv('data.csv', index=False)
     os.remove('data1.csv')
     return new_f
@@ -94,7 +95,7 @@ model = ols('investment ~ rate + GDP -1', data=dat)
 res1 = model.fit()
 
 # plot graph with actual and forecasted values of investment rates for the
-# first regression
+# first regression with interest rate and GDP growth rate as independent variables
 y = dat['investment']
 x = dat[['rate', 'GDP']]
 compare(res1, x, y)
