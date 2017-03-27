@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-"""
-This 
-This program runs a multivariate regression for Keynesian Investment function.
+""" 
+The program is inspired from the macroeconomics project module paper submitted 
+which uses keynesian IS-LM framework to analyse human capital formation. 
+It runs a multivariate regression for Keynesian Investment function.
 The independent variables are business sentiment, GDP, funds Rate and R&D.
 The dependent variable is Investment rate.
 The data is automatically downloaded from the Federal Reserve.
 
 THIS PROGRAM REQUIRES INTERNET ACCESS FOR DOWNLOADING DATA AND AS SUCH WILL NOT
 WORK WITHOUT IT.
+
 """
 import pandas as pd
 from pandas import read_csv
