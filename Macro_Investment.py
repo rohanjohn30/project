@@ -36,6 +36,8 @@ def data():
     Business sentiment, Federal funds rate, and R&D expenditure. All the variables
     are downloaded as percent change from preceding period which removes most
     effects of lagged varibles. Adds labels for each variables in the csv file.
+    Uses pandas dataframe to record, save and edit entries and add headers to the
+    csv file.
     '''
     con = web.DataReader(["A191RL1Q225SBEA",
                           "BSCICP02USQ460S",
@@ -69,7 +71,8 @@ def data():
 def compare(res, x, y):
     '''Plots a graphs with with actual Y and forcasted Y using global variable j
     to keep track and name intermediary image files. Uses regression results(res),
-    independent variable(x) and dependent variable(y)'''
+    independent variable(x) and dependent variable(y). Uses matplotib to plot 
+    graphs.'''
     global i
     ypred = res.predict(x)
     pred = pd.DataFrame(ypred)
