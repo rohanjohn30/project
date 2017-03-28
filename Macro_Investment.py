@@ -2,6 +2,7 @@
 """ 
 The program is inspired from the macroeconomics project module paper submitted 
 which uses keynesian IS-LM framework to analyse human capital formation. 
+Here in this program I try to regress the determinants of investment of the IS curve. 
 It runs a multivariate regression for Keynesian Investment function.
 The independent variables are business sentiment, GDP, funds Rate and R&D.
 The dependent variable is Investment rate.
@@ -145,7 +146,6 @@ results = ['res1', 'res2', 'res3','res4']
 for r in results:
     os.remove(r + '.tex')
     os.remove(r + '.png')
-os.remove('anova.tex')
 pic = ['1', '2']
 for r in pic:
     os.remove(r + '.png')
