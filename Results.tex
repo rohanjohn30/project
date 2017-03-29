@@ -19,50 +19,67 @@
 \newtheorem{exercise}{Exercise}
 \renewcommand{\theenumi}{\roman{enumi}}
 
-% Set this counter to "first exercise of the week minus one".
-\setcounter{exercise}{0}
-
 \begin{document}
 	
+\begin{titlepage}
 	\begin{center}
-		\begin{large}
-			\textbf{
-				Effective programming practices for economists\\
-				Universität Bonn, Winter 2016/17 \\[2ex]
-				Term Paper\\[2ex]
-				Rohan John
-			}
-		\end{large}
+		\vspace*{1cm}
+		
+		\textbf{Effective programming practices for economists}
+		
+		\vspace{0.5cm}
+		\textbf{Term Paper} 
+		
+		\vspace{1cm}
+		
+		\textbf{Submitted by: Rohan John}
+		
+	   \vspace{0.5cm}
+				
+		Department of Economics\\
+		University of Bonn\\
+		Germany\\
+		31st March 2017
+		
+		\vspace{1.5cm}
+		\textbf{\underline{Motivation}} \\
+		\vspace{1cm}
+		This analysis is extrapolated from the project module term paper that I have submitted which uses the IS-MP-PC model. Instead of analyzing the entire model, I have focused the keynesian investment function and the major factors that affect it.This Python program runs multiple regressions on macroeconomic Investment by downloading data from the Federal reserve database. It automatically downloads and sort the variables needed for the regression such as interest rate, GDP growth rate, Business tendency/sentiment and R\&D. Using percentage change instead of absolute values allows us to avoid autocorrelation.\footnote{This regression analysis is not to be used as a well thought out econometric modeling but is only used for the purposes of programming.} The program uses modules such as Pandas for dataframe, Statsmodels for OLS, mathplotlib for graphs.
+		
 	\end{center}
+\end{titlepage}
 
-This Python program runs a regression on macroeconomic Investment by downloading data from the Federal reserve database. It automatically downloads and sort the variables needed for the regression such as interest rate, GDP growth rate, Business sentiment and R\&D. Using percentage change instead of absolute values allows us to avoid autocorrelation.\footnote{This regression analysis is not to be used as a well thought out econometric modeling but is only used for the purposes of programming.}
-
-The general regression equation is: 
+In this analysis we will look at the determinants of macro investment. Using macroeconomic data from the federal reserve, we run multiple regressions by increasing the independent variables in the regression. The four main variables associated with Investment are:\\
+1. Interest rate\\
+2. GDP growth\\
+3. Business sentiment/ tendency\\
+4. R\&D\\
+Hence the general regression equation is: 
 \begin{center}
 	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment +$\beta_{4}$R\&D
 \end{center}
 
-For the first regression equation we'll be dropping the Business sentiment and R\&D variables and hence the equation becomes: 
+For the first regression equation we'll be dropping the Business sentiment and R\&D variables. This gives us the investment equation with the two commonly associated variable like interest rate and GDP, hence the equation becomes: 
 \begin{center}
 	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate
 \end{center}
 \input{res1}
 
-This regression output shows that the interest rate has negative effect while GDP growth rate have positive effect. The government investment/autonomous investment or the intercept has been ignored as it is included in G i.e, govt expenditure. 
+This regression output shows that the interest rate has negative effect while GDP growth rate have positive effect. The government investment/autonomous investment or the intercept has been ignored as it is included in G i.e, govt expenditure under the IS curve. 
 
 In a graph with both the actual investment values and forecasted values, we get:\newline
 \includegraphics[width=0.7\textwidth]{1.png} 
 
 The forecasted values are close to the actual values showing a very good predictive power of the independent variables. To see the relation of investment with interest rates, we do a partial regression plot.
-This shows the Partial regression plots of investment and federal funds rate:
-
+This shows the partial regression plots of investment and fed funds rate:
 \includegraphics[width=1\textwidth]{res1.png}
+
 The partial regression plot show a downward sloping curve. This shows an inverse relation with investment. This is supported by the negative coefficient of fed rate in the regression table, even though its not significant at 5\%. Next we see the partial plots of GDP rate.
 
 \includegraphics[width=1\textwidth]{res4.png} 
 A positive slope represents a positive relation with investment. Higher GDP growth results in higher demand leading to more investment. The highly significant coefficient for GDP in the regression summary also backs up the graph.  
 
-Next we run a second regression equation where we add the business sentiment variable. Business sentiment or confidence is an economic indicator that measures the amount of optimism or pessimism that business managers feel about the prospects of their companies/ organisations. It also provides an overview of the state of the economy. 
+Next we run a second regression equation where we add the business sentiment/tendency variable. Business sentiment  is an economic indicator that measures the amount of optimism or pessimism that business managers feel about the prospects of their companies/organisations or about the state of the economy in general. It also shows the willingness of the organizations to invest in the economy.  
 
 The equation becomes: 
 \begin{center}
@@ -75,8 +92,8 @@ The regression output generated is:
 This shows the Partial regression plots of investment and Business sentiment:
 
 \includegraphics[width=1\textwidth]{res2.png}
+This shows that business tendency has positive slope with respect to investment. This implies that if the businesses believe that the economy and their organizations are in good state, then they will increase their investments in the economy.  
 
-\newpage
 For the third regression equation we add the R\&D variable. R\&D is an important part of investment decision. Investing in R\&D helps increase production efficiency and reduce cost in the long run. This effects the investment rate. Hence the equation becomes:
 \begin{center}
 	investment = $\beta_{1}$ Interest rate +$\beta_{2}$GDP rate+ $\beta_{3}$Business sentiment +$\beta_{4}$R\&D
@@ -94,11 +111,12 @@ This shows the Partial regression plots of investment and R\&D:
 
 \includegraphics[width=1\textwidth]{res3.png}
 There is significant positive effect of R\&D on investment. This shows that R\&D along with GDP rate and business sentiment have a positive impact on investment growth while fed funds rates has a negative impact. This shows that the Keynesian relation of the investment function holds true. 
-
+\newpage
+\textbf{\underline{Conclusion:}}\newline
 The rate variable has now become significant. This may be due to the relation of interest with R\&D variable. Intuitively it can be said that higher rates results in lower research as opportunity cost of investment in  research is higher. 
 
 In a graph with both the actual investment values and forecasted values, we get:\newline
 \includegraphics[width=0.7\textwidth]{2.png} 
 
-The forecasted values are close to the actual values showing a very good predictive power of the independent variables. Adding Business sentiment and R\&D as independent variables have increased the explanatory power of the model. 
+The forecasted values are close to the actual values showing a very good predictive power of the independent variables. Adding Business sentiment and R\&D as independent variables have increased the explanatory power of the model. The regression result shows that the variables used have significant impact on investment. While this may not be conclusive evidence about keynesian investment function in and of itself, it allows us to understand which  variables in the function can affect the IS curve through investment.
 \end{document}
