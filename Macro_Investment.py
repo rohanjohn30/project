@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-""" 
-The program is inspired from the macroeconomics project module paper submitted 
-which uses keynesian IS-LM framework to analyse human capital formation. 
-Here in this program I try to regress the determinants of investment of the IS curve. 
+"""
+The program is inspired from the macroeconomics project module paper submitted
+which uses keynesian IS-LM framework to analyse human capital formation.
+Here in this program I try to regress the determinants of investment of the IS curve.
 It runs a multivariate regression for Keynesian Investment function.
 The independent variables are business sentiment, GDP, funds Rate and R&D.
 The dependent variable is Investment rate.
@@ -48,10 +48,10 @@ def data():
                          start,
                          end)
     con.ix['2013-01-01']
-    con.to_csv('raw.csv')   #saves data to a file
-    con = read_csv('raw.csv')  
+    con.to_csv('raw.csv')  # saves data to a file
+    con = read_csv('raw.csv')
     con.columns = ['Date', 'GDP', 'bsent', 'investment', 'rate', 'research']
-    con.to_csv('test.csv')   #saves data to a new file with column names
+    con.to_csv('test.csv')  # saves data to a new file with column names
     os.remove('raw.csv')
     f = read_csv("test.csv")
     keep_col = ['Date', 'GDP', 'bsent', 'investment', 'rate', 'research']
@@ -71,7 +71,7 @@ def data():
 def compare(res, x, y):
     '''Plots a graphs with with actual Y and forcasted Y using global variable j
     to keep track and name intermediary image files. Uses regression results(res),
-    independent variable(x) and dependent variable(y). Uses matplotib to plot 
+    independent variable(x) and dependent variable(y). Uses matplotib to plot
     graphs.'''
     global i
     ypred = res.predict(x)
@@ -101,7 +101,8 @@ model = ols('investment ~ rate + GDP -1', data=dat)
 res1 = model.fit()
 
 # plot graph with actual and forecasted values of investment rates for the
-# first regression with interest rate and GDP growth rate as independent variables
+# first regression with interest rate and GDP growth rate as independent
+# variables
 y = dat['investment']
 x = dat[['rate', 'GDP']]
 compare(res1, x, y)
@@ -145,7 +146,7 @@ subprocess.check_call(['pdflatex', 'Results.tex'])
 subprocess.Popen('Results.pdf', shell=True)
 
 # deletes all the intermediary files
-results = ['res1', 'res2', 'res3','res4']
+results = ['res1', 'res2', 'res3', 'res4']
 for r in results:
     os.remove(r + '.tex')
     os.remove(r + '.png')
